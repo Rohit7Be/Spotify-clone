@@ -20,7 +20,7 @@ function formatDecimalTime(decimalSeconds) {
 
 async function getSongs(folder){
     currFolder = folder
-    let a = await fetch(`http://127.0.0.1:5500/${folder}/`);
+    let a = await fetch(`/${folder}/`);
     let response = await a.text();
     console.log(response);
     let div = document.createElement("div")
@@ -82,7 +82,7 @@ const playMusic= (track, pause=false)=>{
 }
 
 async function displayAlbums(){
-    let a = await fetch(`http://127.0.0.1:5500/Songs/`);
+    let a = await fetch(`/Songs/`);
     let response = await a.text();
     
     let div = document.createElement("div")
@@ -95,10 +95,10 @@ async function displayAlbums(){
             
         
         
-        if(e.href.includes("/Songs/")){
+        if(e.href.includes("/Songs") && !e.href.includes(".htaccess")){
             let folder = e.href.split("/").slice(-1)[0]
             // getting the metadata of the folder 
-            let a = await fetch(`http://127.0.0.1:5500/Songs/${folder}/info.json`)
+            let a = await fetch(`/Songs/${folder}/info.json`)
             let response = await a.json();
             let cardContainer = document.querySelector(".cardContainer")
             console.log(response)
